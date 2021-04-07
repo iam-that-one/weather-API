@@ -14,7 +14,7 @@ class WeatherViewModel: ObservableObject{
     func fetchWeatherData(cityName: String){
         
         let API_KEY = ""
-        let API_URL = "https://api.openweathermap.org/data/2.5/weather?q=Riyadh&appid=\(API_KEY)"
+        let API_URL = "https://api.openweathermap.org/data/2.5/weather?q=tampa&appid=\(API_KEY)"
         
         guard let url = URL(string: API_URL)else{
             print("Invalid URL . . . ")
@@ -30,7 +30,9 @@ class WeatherViewModel: ObservableObject{
                     DispatchQueue.main.async {
                         self.weather.append(WeatherData(name: response.name, main: response.main, weather: response.weather))
                     }
-                                   print(response)
+                
+                    
+                   print(response)
                 }catch{
                     print(error.localizedDescription)
                 }
@@ -58,4 +60,14 @@ struct Main :Codable{
 
 struct Weather: Codable, Identifiable {
     let id : Int
+    var icon:String{
+        switch id {
+        case 800:
+          return "smoke"
+        case 804:
+            return "cloud.moon.rain"
+        default:
+           return ""
+        }
+    }
 }

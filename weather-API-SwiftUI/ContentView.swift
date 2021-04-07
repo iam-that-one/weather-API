@@ -17,11 +17,11 @@ struct ContentView: View {
                     Text(weather.name)
                         Text("\(weather.main.temp, specifier: "%.2f")")
                     ForEach(weather.weather){ w in
-                        if w.id == 800{
-                            Image(systemName: "smoke")
+                  
+                        Image(systemName: w.icon)
                                 .resizable()
                                 .frame(width: 30, height: 30)
-                        }
+                        
                         
                     }
                     }
