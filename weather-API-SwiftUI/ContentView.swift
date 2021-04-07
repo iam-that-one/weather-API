@@ -19,7 +19,7 @@ struct ContentView: View {
                     HStack(){
                     Text(weather.name)
                         Spacer()
-                        Text("\(weather.main.temp, specifier: "%.2f")")
+                        Text("\((weather.main.temp - 273.15), specifier: "%.0f")°")
                     ForEach(weather.weather){ w in
                   Spacer()
                         Image(systemName: w.icon)
