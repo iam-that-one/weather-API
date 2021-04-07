@@ -14,7 +14,7 @@ class WeatherViewModel: ObservableObject{
     func fetchWeatherData(cityName: String){
         
         let API_KEY = ""
-        let API_URL = "https://api.openweathermap.org/data/2.5/weather?q=tampa&appid=\(API_KEY)"
+        let API_URL = "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(API_KEY)"
         
         guard let url = URL(string: API_URL)else{
             print("Invalid URL . . . ")
@@ -62,12 +62,22 @@ struct Weather: Codable, Identifiable {
     let id : Int
     var icon:String{
         switch id {
+        case 200...232:
+            return "cloud.bolt"
+        case 300...321:
+            return "cloud.drizzle"
+        case 500...531:
+            return "cloud.rain"
+        case 600...622:
+            return "cloud.snow"
+        case 701...781:
+            return "cloud.fog"
         case 800:
-          return "smoke"
-        case 804:
-            return "cloud.moon.rain"
+            return "sun.max"
+        case 801...804:
+            return "cloud.bolt"
         default:
-           return ""
+            return "cloud"
         }
     }
 }
