@@ -30,9 +30,7 @@ class WeatherViewModel: ObservableObject{
                     DispatchQueue.main.async {
                         self.weather.append(WeatherData(name: response.name, main: response.main, weather: response.weather))
                     }
-                
-                    
-                   print(response)
+                                   print(response)
                 }catch{
                     print(error.localizedDescription)
                 }
