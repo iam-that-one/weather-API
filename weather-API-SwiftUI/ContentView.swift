@@ -12,12 +12,14 @@ struct ContentView: View {
     @StateObject var vm = WeatherViewModel()
     var body: some View {
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [.white,.gray, .blue,.gray]), startPoint: .top, endPoint: .bottom)
+           // LinearGradient(gradient: Gradient(colors: [.orange,.gray, .blue,.gray]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [.white,.gray,.blue, .gray,]), startPoint: .top, endPoint: .bottom).opacity(0.50)
         VStack{
          
                 ForEach(vm.weather){ weather in
                     HStack(){
                     Text(weather.name)
+                        .frame(width: 100)
                         Spacer()
                         Text("\((weather.main.temp - 273.15), specifier: "%.0f")°")
                     ForEach(weather.weather){ w in
@@ -25,6 +27,7 @@ struct ContentView: View {
                         Image(systemName: w.icon)
                                 .resizable()
                                 .frame(width: 30, height: 30)
+                           
                         
                         
                     }
