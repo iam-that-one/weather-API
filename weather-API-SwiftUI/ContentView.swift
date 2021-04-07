@@ -11,13 +11,25 @@ struct ContentView: View {
     @State  var cityName = ""
     @StateObject var vm = WeatherViewModel()
     var body: some View {
+        HStack{
+          
+        TextField("city name", text: $cityName)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            Button(action: {
+                    vm.fetchWeatherData(cityName: cityName)
+            }, label: {
+                Image(systemName: "magnifyingglass")
+                    .padding(8)
+                    .background(Color.white)
+                    .cornerRadius(10)
+            })
+        }.padding(.horizontal)
         ZStack{
-           // LinearGradient(gradient: Gradient(colors: [.orange,.gray, .blue,.gray]), startPoint: .top, endPoint: .bottom)
             LinearGradient(gradient: Gradient(colors: [.white,.gray,.blue, .gray,]), startPoint: .top, endPoint: .bottom).opacity(0.50)
-        VStack{
-         
+           
+        ScrollView(){
                 ForEach(vm.weather){ weather in
-                    HStack(){
+                    HStack(alignment: .firstTextBaseline){
                     Text(weather.name)
                         .frame(width: 100)
                         Spacer()
@@ -27,33 +39,17 @@ struct ContentView: View {
                         Image(systemName: w.icon)
                                 .resizable()
                                 .frame(width: 30, height: 30)
-                           
-                        
-                        
+                            .foregroundColor(.secondary)
+                            .shadow(color: .yellow,radius: 10)
+                         
                     }
-                       
                     }
                     Divider()
-                }.listRowBackground( LinearGradient(gradient: Gradient(colors: [.purple, .blue,]), startPoint: .top, endPoint: .bottom))
+                }
                 Spacer()
             .foregroundColor(.white)
-            HStack{
-                Spacer()
-              
-            TextField("city name", text: $cityName)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                Button(action: {vm.fetchWeatherData(cityName: cityName)}, label: {
-                    Image(systemName: "magnifyingglass")
-                        .padding(8)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                
-                })
-               // Spacer()
-            }.padding(.bottom)
-            
-           
         }.padding()
+            
         }.edgesIgnoringSafeArea(.bottom)
     }
 }

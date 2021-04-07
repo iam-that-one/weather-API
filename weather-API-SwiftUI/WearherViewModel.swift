@@ -30,8 +30,6 @@ class WeatherViewModel: ObservableObject{
                     DispatchQueue.main.async {
                         self.weather.append(WeatherData(name: response.name, main: response.main, weather: response.weather))
                     }
-                
-                    
                    print(response)
                 }catch{
                     print(error.localizedDescription)
@@ -42,7 +40,6 @@ class WeatherViewModel: ObservableObject{
     dataTask.resume()
     }
 }
-
 
 
 struct WeatherData : Codable, Identifiable{
