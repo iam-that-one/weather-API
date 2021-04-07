@@ -12,7 +12,7 @@ struct ContentView: View {
     @StateObject var vm = WeatherViewModel()
     var body: some View {
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [.white,.gray, .blue]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [.white,.gray, .blue,.gray]), startPoint: .top, endPoint: .bottom)
         VStack{
          
                 ForEach(vm.weather){ weather in
@@ -36,18 +36,19 @@ struct ContentView: View {
             .foregroundColor(.white)
             HStack{
                 Spacer()
-                Image(systemName: "magnifyingglass")
+              
             TextField("city name", text: $cityName)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                Button(action: {vm.fetchWeatherData(cityName: cityName)}, label: {
+                    Image(systemName: "magnifyingglass")
+                        .padding(8)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                
+                })
                // Spacer()
-            }
-            Button(action: {vm.fetchWeatherData(cityName: cityName)}, label: {
-                Text("Fetch weather")
-                    .foregroundColor(.white)
-                    .padding(5)
-                    .border(Color.white,width: 2)
+            }.padding(.bottom)
             
-            })
            
         }.padding()
         }.edgesIgnoringSafeArea(.bottom)
