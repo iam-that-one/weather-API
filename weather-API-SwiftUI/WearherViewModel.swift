@@ -72,8 +72,6 @@ struct Main :Codable{
 
 
 struct Weather: Codable, Identifiable {
-    
-   
     let id : Int
     let icon : String
     let description : String
