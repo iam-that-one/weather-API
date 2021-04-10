@@ -10,11 +10,9 @@ import Foundation
 class WeatherViewModel: ObservableObject{
     @Published var weather = [WeatherData]()
 
-    
-   
     func fetchWeatherData(cityName: String){
      
-        let API_KEY = ""
+        let API_KEY = "866847902dae7817cfda96a6c8990b35"
         let API_URL = "https://api.openweathermap.org/data/2.5/weather?q=\(cityName)&appid=\(API_KEY)"
         
         guard let url = URL(string: API_URL)else{

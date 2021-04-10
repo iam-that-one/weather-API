@@ -62,8 +62,8 @@ struct ContentView: View {
                         .frame(width: 100)
                         Spacer()
                         Text("\((weather.main.temp - 273.15), specifier: "%.0f")°")
-                            .shadow(color: .yellow ,radius: 10)
                             .offset(x: -20)
+                            .shadow(color: .white ,radius: 10)
                     ForEach(weather.weather){ w in
                   Spacer()
                         Image(uiImage:UIImage(data: vm.loadImage(ImageUrl: w.icon) ?? Data()) ?? UIImage())
@@ -73,11 +73,11 @@ struct ContentView: View {
                           .shadow(color: .yellow,radius: 10)
                          
                     }
-                    }
+                    }.frame(height: 70)
                     if showMoreDetails == true &&  nameToExpand == weather.name{
                         Rectangle()
                             .fill(LinearGradient(gradient: Gradient(colors: [.white,.gray]), startPoint: .top, endPoint: .bottom))
-                            .frame(width: UIScreen.main.bounds.width, height: 140)
+                            .frame(width: UIScreen.main.bounds.width, height: 300)
                             //.foregroundColor(.orange)
                             
                                                                     
@@ -86,13 +86,28 @@ struct ContentView: View {
                                 VStack(alignment: .leading){
                               
                                 //if nameToExpand == weather.name{
-                                Text("feels like: \(weather.main.feels_like - 273.15,  specifier: "%.0f")°")
-                                Text("temp min: \(weather.main.temp_min,  specifier: "%.0f")°")
-                                Text("temp max: \(weather.main.temp_max,  specifier: "%.0f")°")
-                                Text("pressure: \(weather.main.pressure)")
-                                Text("humidity: \(weather.main.humidity)")
+                                    HStack{
+                                Text("feels like")
+                                        Spacer()
+                                Text("\(weather.main.feels_like - 273.15,  specifier: "%.0f")°")
+                                    }.padding(5)
+                                    .background(Color.orange)
+                                    .cornerRadius(10)
+                                    Divider()
+                                    
+                                    Text("temp min")
+                                    
+                                Text("\(weather.main.temp_min,  specifier: "%.0f")°")
+                                    Text("temp max")
+                                    
+                                Text("\(weather.main.temp_max,  specifier: "%.0f")°")
+                                    Text("pressure")
+                                Text(" \(weather.main.pressure)")
+                                    Text("humidity")
+                                Text("\(weather.main.humidity)")
                                     ForEach(weather.weather){ w in
-                                        Text("description: \(w.description)")
+                                        Text("description")
+                                        Text("\(w.description)")
                                     }
                                // }
                                    
